@@ -40,7 +40,7 @@ from .forms import UserDetailsForm
 
 class TestUserDetailForm(TestCase):
     def test_post_is_valid(self):
-        post_data = form_faker.get_post_data(UserDetailsForm)
+        post_data = form_faker.get_data(UserDetailsForm)
         form = UserDetailsForm(data=post_data)
         self.assertTrue(form.is_valid())
 
