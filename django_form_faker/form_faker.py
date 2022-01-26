@@ -6,6 +6,10 @@ from django import forms
 fake = Faker()
 
 
+def generate_boolean_field(field_instance):
+    return fake.boolean()
+
+
 def generate_char_field(field_instance):
     if field_instance.max_length:
         letters = fake.random_letters(field_instance.max_length)
@@ -18,6 +22,7 @@ def generate_char_field(field_instance):
 
 
 generators = {
+    forms.BooleanField: generate_boolean_field,
     forms.CharField: generate_char_field,
 }
 
