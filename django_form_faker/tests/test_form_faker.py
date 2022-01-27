@@ -30,7 +30,7 @@ def test_random_generated_values(field_class, expected):
         (forms.CharField, "explicit value"),
     ],
 )
-def test_random_generated_values(field_class, explicit_value):
+def test_explicit_values(field_class, explicit_value):
     class FormToTest(forms.Form):
         field_to_test = field_class()
 
