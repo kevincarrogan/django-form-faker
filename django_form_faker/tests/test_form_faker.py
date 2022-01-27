@@ -6,15 +6,16 @@ from .. import form_faker
 
 
 @pytest.mark.parametrize(
-    "field_class,expected",
+    "field_class,required_kwargs,expected",
     [
-        (forms.BooleanField, True),
-        (forms.CharField, "RNvnAvOpyEVAoNGn"),
+        (forms.BooleanField, {}, True),
+        (forms.CharField, {}, "RNvnAvOpyEVAoNGn"),
+        (forms.ChoiceField, {"choices": ["a", "b", "c"]}, "b"),
     ],
 )
-def test_random_generated_values(field_class, expected):
+def test_random_generated_values(field_class, required_kwargs, expected):
     class FormToTest(forms.Form):
-        field_to_test = field_class()
+        field_to_test = field_class(**required_kwargs)
 
     post_data = form_faker.get_data(FormToTest)
 
@@ -24,15 +25,16 @@ def test_random_generated_values(field_class, expected):
 
 
 @pytest.mark.parametrize(
-    "field_class,explicit_value",
+    "field_class,required_kwargs,explicit_value",
     [
-        (forms.BooleanField, False),
-        (forms.CharField, "explicit value"),
+        (forms.BooleanField, {}, False),
+        (forms.CharField, {}, "explicit value"),
+        (forms.ChoiceField, {"choices": ["a", "b", "c"]}, "a"),
     ],
 )
-def test_explicit_values(field_class, explicit_value):
+def test_explicit_values(field_class, required_kwargs, explicit_value):
     class FormToTest(forms.Form):
-        field_to_test = field_class()
+        field_to_test = field_class(**required_kwargs)
 
     post_data = form_faker.get_data(FormToTest, field_to_test=explicit_value)
 
@@ -42,15 +44,16 @@ def test_explicit_values(field_class, explicit_value):
 
 
 @pytest.mark.parametrize(
-    "field_class",
+    "field_class,required_kwargs",
     [
-        forms.BooleanField,
-        forms.CharField,
+        (forms.BooleanField, {}),
+        (forms.CharField, {}),
+        (forms.ChoiceField, {"choices": ["a", "b", "c"]}),
     ],
 )
-def test_not_required(field_class):
+def test_not_required(field_class, required_kwargs):
     class FormToTest(forms.Form):
-        field_to_test = field_class(required=False)
+        field_to_test = field_class(required=False, **required_kwargs)
 
     post_data = form_faker.get_data(FormToTest)
 

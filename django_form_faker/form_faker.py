@@ -6,11 +6,11 @@ from django import forms
 fake = Faker()
 
 
-def generate_boolean_field(field_instance):
+def generate_boolean_field_value(field_instance):
     return fake.boolean()
 
 
-def generate_char_field(field_instance):
+def generate_char_field_value(field_instance):
     if field_instance.max_length:
         letters = fake.random_letters(field_instance.max_length)
     elif field_instance.min_length:
@@ -21,9 +21,14 @@ def generate_char_field(field_instance):
     return "".join(letters)
 
 
+def generate_choice_field_value(field_instance):
+    return fake.random_element(field_instance.choices)
+
+
 generators = {
-    forms.BooleanField: generate_boolean_field,
-    forms.CharField: generate_char_field,
+    forms.BooleanField: generate_boolean_field_value,
+    forms.CharField: generate_char_field_value,
+    forms.ChoiceField: generate_choice_field_value,
 }
 
 
