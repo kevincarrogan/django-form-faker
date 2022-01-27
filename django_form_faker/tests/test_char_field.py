@@ -11,37 +11,6 @@ def seed_faker():
     Faker.seed(0)
 
 
-def test_char_field():
-    class CharFieldForm(forms.Form):
-        char_field = forms.CharField()
-
-    post_data = form_faker.get_data(CharFieldForm)
-
-    assert post_data == {
-        "char_field": "RNvnAvOpyEVAoNGn",
-    }
-
-
-def test_char_field_explicit_value():
-    class CharFieldForm(forms.Form):
-        char_field = forms.CharField()
-
-    post_data = form_faker.get_data(CharFieldForm, char_field="explicit value")
-
-    assert post_data == {
-        "char_field": "explicit value",
-    }
-
-
-def test_char_field_not_required():
-    class CharFieldForm(forms.Form):
-        char_field = forms.CharField(required=False)
-
-    post_data = form_faker.get_data(CharFieldForm, char_field="explicit value")
-
-    assert post_data == {}
-
-
 def test_char_field_max_length():
     class CharFieldForm(forms.Form):
         char_field = forms.CharField(max_length=2)
