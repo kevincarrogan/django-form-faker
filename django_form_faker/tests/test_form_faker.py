@@ -8,8 +8,8 @@ from .. import form_faker
 @pytest.mark.parametrize(
     "field_class,expected",
     [
-        (forms.CharField, "RNvnAvOpyEVAoNGn"),
         (forms.BooleanField, True),
+        (forms.CharField, "RNvnAvOpyEVAoNGn"),
     ],
 )
 def test_random_generated_values(field_class, expected):
@@ -26,8 +26,8 @@ def test_random_generated_values(field_class, expected):
 @pytest.mark.parametrize(
     "field_class,explicit_value",
     [
-        (forms.CharField, "explicit value"),
         (forms.BooleanField, False),
+        (forms.CharField, "explicit value"),
     ],
 )
 def test_random_generated_values(field_class, explicit_value):
@@ -44,8 +44,8 @@ def test_random_generated_values(field_class, explicit_value):
 @pytest.mark.parametrize(
     "field_class",
     [
-        forms.CharField,
         forms.BooleanField,
+        forms.CharField,
     ],
 )
 def test_not_required(field_class):
