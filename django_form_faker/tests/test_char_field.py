@@ -1,14 +1,6 @@
-import pytest
-
-from faker import Faker
 from django import forms
 
 from .. import form_faker
-
-
-@pytest.fixture(autouse=True)
-def seed_faker():
-    Faker.seed(0)
 
 
 def test_char_field_max_length():

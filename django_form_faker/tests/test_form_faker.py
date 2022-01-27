@@ -1,14 +1,8 @@
 import pytest
 
 from django import forms
-from faker import Faker
 
 from .. import form_faker
-
-
-@pytest.fixture(autouse=True)
-def seed_faker():
-    Faker.seed(0)
 
 
 @pytest.mark.parametrize(
