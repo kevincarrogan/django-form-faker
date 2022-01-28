@@ -32,7 +32,7 @@ generators = {
 }
 
 
-def get_data(form_class, **kwargs):
+def get_data(form_class, _include_optional=False, **kwargs):
     fields = form_class.declared_fields
 
     post_data = {}
@@ -41,7 +41,7 @@ def get_data(form_class, **kwargs):
             post_data[field_name] = kwargs[field_name]
             continue
 
-        if not field.required:
+        if not _include_optional and not field.required:
             continue
 
         post_data[field_name] = generators[field.__class__](field)

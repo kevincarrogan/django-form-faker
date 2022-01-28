@@ -81,3 +81,26 @@ def test_not_required(field_class, required_kwargs):
     post_data = form_faker.get_data(FormToTest)
 
     assert post_data == {}
+
+
+@pytest.mark.parametrize(
+    "field_class,required_kwargs,expected",
+    [
+        (forms.BooleanField, {}, True),
+        (forms.CharField, {}, "RNvnAvOpyEVAoNGn"),
+        (forms.ChoiceField, {"choices": ["a", "b", "c"]}, "b"),
+    ],
+)
+def test_optional_fields_with_include_optional_override(
+    field_class,
+    required_kwargs,
+    expected,
+):
+    class FormToTest(forms.Form):
+        field_to_test = field_class(required=False, **required_kwargs)
+
+    post_data = form_faker.get_data(FormToTest, _include_optional=True)
+
+    assert post_data == {
+        "field_to_test": expected,
+    }
