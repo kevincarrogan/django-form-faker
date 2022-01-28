@@ -37,14 +37,13 @@ def get_data(form_class, **kwargs):
 
     post_data = {}
     for field_name, field in fields.items():
+        if field_name in kwargs:
+            post_data[field_name] = kwargs[field_name]
+            continue
+
         if not field.required:
             continue
 
-        if field_name in kwargs:
-            value = kwargs[field_name]
-        else:
-            value = generators[field.__class__](field)
-
-        post_data[field_name] = value
+        post_data[field_name] = generators[field.__class__](field)
 
     return post_data
