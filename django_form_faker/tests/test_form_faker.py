@@ -1,5 +1,7 @@
 import pytest
 
+from decimal import Decimal
+
 from django import forms
 
 from .. import form_faker
@@ -13,6 +15,13 @@ from .. import form_faker
         (forms.ChoiceField, {"choices": [("a", "A"), ("b", "B"), ("c", "C")]}, "b"),
         (forms.DateField, {}, "1996-03-20"),
         (forms.DateTimeField, {}, "1996-03-20T07:46:39"),
+        (
+            forms.DecimalField,
+            {},
+            Decimal(
+                "-6048764759382421948924115781565938778408016097535139332871158714841858398947196593423209471122018.684833969477515917953304135256012309891013991615109032173008691413145620870916345792302"
+            ),
+        ),
     ],
 )
 def test_random_generated_values(field_class, required_kwargs, expected):
@@ -37,6 +46,7 @@ def test_random_generated_values(field_class, required_kwargs, expected):
         (forms.ChoiceField, {"choices": [("a", "A"), ("b", "B"), ("c", "C")]}, "a"),
         (forms.DateField, {}, "2000-01-01"),
         (forms.DateTimeField, {}, "2000-01-01T01:01:01"),
+        (forms.DecimalField, {}, "1.200320"),
     ],
 )
 def test_explicit_values(field_class, required_kwargs, explicit_value):
@@ -58,6 +68,7 @@ def test_explicit_values(field_class, required_kwargs, explicit_value):
         (forms.ChoiceField, {"choices": [("a", "A"), ("b", "B"), ("c", "C")]}, "a"),
         (forms.DateField, {}, "2000-01-01"),
         (forms.DateTimeField, {}, "2000-01-01T01:01:01"),
+        (forms.DecimalField, {}, "1.200320"),
     ],
 )
 def test_explicit_values_on_optional_fields(
@@ -83,6 +94,7 @@ def test_explicit_values_on_optional_fields(
         (forms.ChoiceField, {"choices": [("a", "A"), ("b", "B"), ("c", "C")]}),
         (forms.DateField, {}),
         (forms.DateTimeField, {}),
+        (forms.DecimalField, {}),
     ],
 )
 def test_not_required(field_class, required_kwargs):
@@ -102,6 +114,13 @@ def test_not_required(field_class, required_kwargs):
         (forms.ChoiceField, {"choices": [("a", "A"), ("b", "B"), ("c", "C")]}, "b"),
         (forms.DateField, {}, "1996-03-20"),
         (forms.DateTimeField, {}, "1996-03-20T07:46:39"),
+        (
+            forms.DecimalField,
+            {},
+            Decimal(
+                "-6048764759382421948924115781565938778408016097535139332871158714841858398947196593423209471122018.684833969477515917953304135256012309891013991615109032173008691413145620870916345792302"
+            ),
+        ),
     ],
 )
 def test_optional_fields_with_include_optional_override(

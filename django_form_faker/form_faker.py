@@ -34,12 +34,28 @@ def generate_date_time_field_value(field_instance):
     return fake.iso8601()
 
 
+def generate_decimal_field_value(field_instance):
+    kwargs = {}
+    if field_instance.max_value:
+        kwargs["max_value"] = field_instance.max_value
+    if field_instance.min_value:
+        kwargs["min_value"] = field_instance.min_value
+    if field_instance.decimal_places:
+        kwargs["right_digits"] = field_instance.decimal_places
+    if field_instance.max_digits:
+        kwargs["left_digits"] = (
+            field_instance.max_digits - field_instance.decimal_places
+        )
+    return fake.pydecimal(**kwargs)
+
+
 generators = {
     forms.BooleanField: generate_boolean_field_value,
     forms.CharField: generate_char_field_value,
     forms.ChoiceField: generate_choice_field_value,
     forms.DateField: generate_date_field_value,
     forms.DateTimeField: generate_date_time_field_value,
+    forms.DecimalField: generate_decimal_field_value,
 }
 
 
