@@ -11,6 +11,7 @@ from .. import form_faker
         (forms.BooleanField, {}, True),
         (forms.CharField, {}, "RNvnAvOpyEVAoNGn"),
         (forms.ChoiceField, {"choices": ["a", "b", "c"]}, "b"),
+        (forms.DateField, {}, "1996-03-20"),
     ],
 )
 def test_random_generated_values(field_class, required_kwargs, expected):
@@ -30,6 +31,7 @@ def test_random_generated_values(field_class, required_kwargs, expected):
         (forms.BooleanField, {}, False),
         (forms.CharField, {}, "explicit value"),
         (forms.ChoiceField, {"choices": ["a", "b", "c"]}, "a"),
+        (forms.DateField, {}, "2000-01-01"),
     ],
 )
 def test_explicit_values(field_class, required_kwargs, explicit_value):
@@ -49,6 +51,7 @@ def test_explicit_values(field_class, required_kwargs, explicit_value):
         (forms.BooleanField, {}, False),
         (forms.CharField, {}, "explicit value"),
         (forms.ChoiceField, {"choices": ["a", "b", "c"]}, "a"),
+        (forms.DateField, {}, "2000-01-01"),
     ],
 )
 def test_explicit_values_on_optional_fields(
@@ -72,6 +75,7 @@ def test_explicit_values_on_optional_fields(
         (forms.BooleanField, {}),
         (forms.CharField, {}),
         (forms.ChoiceField, {"choices": ["a", "b", "c"]}),
+        (forms.DateField, {}),
     ],
 )
 def test_not_required(field_class, required_kwargs):
@@ -89,6 +93,7 @@ def test_not_required(field_class, required_kwargs):
         (forms.BooleanField, {}, True),
         (forms.CharField, {}, "RNvnAvOpyEVAoNGn"),
         (forms.ChoiceField, {"choices": ["a", "b", "c"]}, "b"),
+        (forms.DateField, {}, "1996-03-20"),
     ],
 )
 def test_optional_fields_with_include_optional_override(
