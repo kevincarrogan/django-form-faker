@@ -22,7 +22,7 @@ def generate_char_field_value(field_instance):
 
 
 def generate_choice_field_value(field_instance):
-    return fake.random_element(field_instance.choices)
+    return fake.random_element(field_instance.choices)[0]
 
 
 def generate_date_field_value(field_instance):
