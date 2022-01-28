@@ -12,6 +12,7 @@ from .. import form_faker
         (forms.CharField, {}, "RNvnAvOpyEVAoNGn"),
         (forms.ChoiceField, {"choices": [("a", "A"), ("b", "B"), ("c", "C")]}, "b"),
         (forms.DateField, {}, "1996-03-20"),
+        (forms.DateTimeField, {}, "1996-03-20T07:46:39"),
     ],
 )
 def test_random_generated_values(field_class, required_kwargs, expected):
@@ -34,7 +35,9 @@ def test_random_generated_values(field_class, required_kwargs, expected):
         (forms.BooleanField, {}, False),
         (forms.CharField, {}, "explicit value"),
         (forms.ChoiceField, {"choices": [("a", "A"), ("b", "B"), ("c", "C")]}, "a"),
-        (forms.DateField, {}, "2000-01-01"),    ],
+        (forms.DateField, {}, "2000-01-01"),
+        (forms.DateTimeField, {}, "2000-01-01T01:01:01"),
+    ],
 )
 def test_explicit_values(field_class, required_kwargs, explicit_value):
     class FormToTest(forms.Form):
@@ -54,6 +57,7 @@ def test_explicit_values(field_class, required_kwargs, explicit_value):
         (forms.CharField, {}, "explicit value"),
         (forms.ChoiceField, {"choices": [("a", "A"), ("b", "B"), ("c", "C")]}, "a"),
         (forms.DateField, {}, "2000-01-01"),
+        (forms.DateTimeField, {}, "2000-01-01T01:01:01"),
     ],
 )
 def test_explicit_values_on_optional_fields(
@@ -78,6 +82,7 @@ def test_explicit_values_on_optional_fields(
         (forms.CharField, {}),
         (forms.ChoiceField, {"choices": [("a", "A"), ("b", "B"), ("c", "C")]}),
         (forms.DateField, {}),
+        (forms.DateTimeField, {}),
     ],
 )
 def test_not_required(field_class, required_kwargs):
@@ -96,6 +101,7 @@ def test_not_required(field_class, required_kwargs):
         (forms.CharField, {}, "RNvnAvOpyEVAoNGn"),
         (forms.ChoiceField, {"choices": [("a", "A"), ("b", "B"), ("c", "C")]}, "b"),
         (forms.DateField, {}, "1996-03-20"),
+        (forms.DateTimeField, {}, "1996-03-20T07:46:39"),
     ],
 )
 def test_optional_fields_with_include_optional_override(

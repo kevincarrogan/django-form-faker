@@ -30,11 +30,16 @@ def generate_date_field_value(field_instance):
     return fake.date(pattern=input_format)
 
 
+def generate_date_time_field_value(field_instance):
+    return fake.iso8601()
+
+
 generators = {
     forms.BooleanField: generate_boolean_field_value,
     forms.CharField: generate_char_field_value,
     forms.ChoiceField: generate_choice_field_value,
     forms.DateField: generate_date_field_value,
+    forms.DateTimeField: generate_date_time_field_value,
 }
 
 
