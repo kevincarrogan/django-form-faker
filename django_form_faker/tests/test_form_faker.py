@@ -1,3 +1,4 @@
+import datetime
 import pytest
 
 from decimal import Decimal
@@ -22,6 +23,7 @@ from .. import form_faker
                 "-6048764759382421948924115781565938778408016097535139332871158714841858398947196593423209471122018.684833969477515917953304135256012309891013991615109032173008691413145620870916345792302"
             ),
         ),
+        (forms.DurationField, {}, datetime.timedelta(18, 34345)),
     ],
 )
 def test_random_generated_values(field_class, required_kwargs, expected):
@@ -47,6 +49,7 @@ def test_random_generated_values(field_class, required_kwargs, expected):
         (forms.DateField, {}, "2000-01-01"),
         (forms.DateTimeField, {}, "2000-01-01T01:01:01"),
         (forms.DecimalField, {}, "1.200320"),
+        (forms.DurationField, {}, "4 1:15:20"),
     ],
 )
 def test_explicit_values(field_class, required_kwargs, explicit_value):
@@ -69,6 +72,7 @@ def test_explicit_values(field_class, required_kwargs, explicit_value):
         (forms.DateField, {}, "2000-01-01"),
         (forms.DateTimeField, {}, "2000-01-01T01:01:01"),
         (forms.DecimalField, {}, "1.200320"),
+        (forms.DurationField, {}, "4 1:15:20"),
     ],
 )
 def test_explicit_values_on_optional_fields(
@@ -95,6 +99,7 @@ def test_explicit_values_on_optional_fields(
         (forms.DateField, {}),
         (forms.DateTimeField, {}),
         (forms.DecimalField, {}),
+        (forms.DurationField, {}),
     ],
 )
 def test_not_required(field_class, required_kwargs):
@@ -121,6 +126,7 @@ def test_not_required(field_class, required_kwargs):
                 "-6048764759382421948924115781565938778408016097535139332871158714841858398947196593423209471122018.684833969477515917953304135256012309891013991615109032173008691413145620870916345792302"
             ),
         ),
+        (forms.DurationField, {}, datetime.timedelta(18, 34345)),
     ],
 )
 def test_optional_fields_with_include_optional_override(

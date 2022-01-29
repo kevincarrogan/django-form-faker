@@ -49,6 +49,10 @@ def generate_decimal_field_value(field_instance):
     return fake.pydecimal(**kwargs)
 
 
+def generate_duration_field_value(field_instance):
+    return fake.time_delta(fake.future_datetime())
+
+
 generators = {
     forms.BooleanField: generate_boolean_field_value,
     forms.CharField: generate_char_field_value,
@@ -56,6 +60,7 @@ generators = {
     forms.DateField: generate_date_field_value,
     forms.DateTimeField: generate_date_time_field_value,
     forms.DecimalField: generate_decimal_field_value,
+    forms.DurationField: generate_duration_field_value,
 }
 
 
