@@ -53,6 +53,10 @@ def generate_duration_field_value(field_instance):
     return fake.time_delta(fake.future_datetime())
 
 
+def generate_email_field_value(field_instance):
+    return fake.email()
+
+
 generators = {
     forms.BooleanField: generate_boolean_field_value,
     forms.CharField: generate_char_field_value,
@@ -61,6 +65,7 @@ generators = {
     forms.DateTimeField: generate_date_time_field_value,
     forms.DecimalField: generate_decimal_field_value,
     forms.DurationField: generate_duration_field_value,
+    forms.EmailField: generate_email_field_value,
 }
 
 
