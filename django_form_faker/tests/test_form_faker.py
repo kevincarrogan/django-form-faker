@@ -2,6 +2,7 @@ import datetime
 import pytest
 
 from decimal import Decimal
+from pathlib import Path
 
 from django import forms
 
@@ -38,7 +39,35 @@ def test_random_generated_values(field_class, required_kwargs, expected):
     }
 
     form = FormToTest(data=post_data)
-    assert form.is_valid()
+    assert form.is_valid(), f"Invalid with {form.errors}"
+
+
+@pytest.mark.parametrize(
+    "field_class",
+    [
+        forms.FileField,
+    ],
+)
+def test_random_generated_files(field_class):
+    class FormToTest(forms.Form):
+        non_file_field = forms.CharField()
+        file_field = field_class()
+
+    post_data = form_faker.get_data(FormToTest)
+    assert "file_field" not in post_data
+
+    files_data = form_faker.get_files(FormToTest)
+    assert "non_file_field" not in files_data
+
+    file_data = files_data["file_field"]
+    current_path = Path(__file__).parent
+    test_data_path = current_path / "data" / "random_binary_file"
+    with open(test_data_path, "rb") as test_data_file:
+        assert file_data.read() == test_data_file.read()
+    assert file_data.name == "test_file"
+
+    form = FormToTest(data=post_data, files=files_data)
+    assert form.is_valid(), f"Invalid with {form.errors}"
 
 
 @pytest.mark.parametrize(

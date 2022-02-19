@@ -1,6 +1,7 @@
 from faker import Faker
 
 from django import forms
+from django.core.files.uploadedfile import SimpleUploadedFile
 
 
 fake = Faker()
@@ -69,11 +70,24 @@ generators = {
 }
 
 
+def generate_file(field_instance):
+    return fake.binary()
+
+
+file_field_generators = {
+    forms.FileField: generate_file,
+}
+
+
 def get_data(form_class, _include_optional=False, **kwargs):
     fields = form_class.declared_fields
 
     post_data = {}
     for field_name, field in fields.items():
+        field_class = field.__class__
+        if field_class in file_field_generators:
+            continue
+
         if field_name in kwargs:
             post_data[field_name] = kwargs[field_name]
             continue
@@ -81,6 +95,23 @@ def get_data(form_class, _include_optional=False, **kwargs):
         if not _include_optional and not field.required:
             continue
 
-        post_data[field_name] = generators[field.__class__](field)
+        post_data[field_name] = generators[field_class](field)
 
     return post_data
+
+
+def get_files(form_class):
+    fields = form_class.declared_fields
+
+    file_data = {}
+    for field_name, field in fields.items():
+        field_class = field.__class__
+        if field_class not in file_field_generators:
+            continue
+
+        file_data[field_name] = SimpleUploadedFile(
+            "test_file",
+            file_field_generators[field_class](field),
+        )
+
+    return file_data
