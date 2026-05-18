@@ -55,3 +55,12 @@ class TestUserDetailForm(TestCase):
         )
         self.assertFalse(form.is_valid())
 ```
+
+## Development
+
+This project uses [uv](https://docs.astral.sh/uv/) for dependency management.
+
+```bash
+uv sync          # create the environment and install dependencies
+uv run pytest    # run the test suite
+```
