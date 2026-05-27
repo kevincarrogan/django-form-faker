@@ -144,8 +144,19 @@ def generate_file(field_instance):
     return fake.binary()
 
 
+def generate_image(field_instance):
+    from io import BytesIO
+
+    from PIL import Image
+
+    buf = BytesIO()
+    Image.new("RGB", (1, 1)).save(buf, format="PNG")
+    return "test_file.png", buf.getvalue()
+
+
 file_field_generators = {
     forms.FileField: generate_file,
+    forms.ImageField: generate_image,
 }
 
 
@@ -179,9 +190,11 @@ def get_files(form_class):
         if field_class not in file_field_generators:
             continue
 
-        file_data[field_name] = SimpleUploadedFile(
-            "test_file",
-            file_field_generators[field_class](field),
-        )
+        result = file_field_generators[field_class](field)
+        if isinstance(result, tuple):
+            file_name, file_content = result
+        else:
+            file_name, file_content = "test_file", result
+        file_data[field_name] = SimpleUploadedFile(file_name, file_content)
 
     return file_data
