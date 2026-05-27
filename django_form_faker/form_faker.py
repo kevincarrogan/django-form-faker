@@ -100,6 +100,11 @@ def generate_slug_field_value(field_instance):
     return fake.slug()
 
 
+def generate_time_field_value(field_instance):
+    input_format = field_instance.input_formats[0]
+    return fake.time(pattern=input_format)
+
+
 def generate_url_field_value(field_instance):
     return fake.url()
 
@@ -124,6 +129,7 @@ generators = {
     forms.MultipleChoiceField: generate_multiple_choice_field_value,
     forms.NullBooleanField: generate_null_boolean_field_value,
     forms.SlugField: generate_slug_field_value,
+    forms.TimeField: generate_time_field_value,
     forms.URLField: generate_url_field_value,
     forms.UUIDField: generate_uuid_field_value,
 }
