@@ -83,6 +83,10 @@ def generate_integer_field_value(field_instance):
     return fake.pyint(**kwargs)
 
 
+def generate_json_field_value(field_instance):
+    return fake.json()
+
+
 def generate_slug_field_value(field_instance):
     return fake.slug()
 
@@ -107,6 +111,7 @@ generators = {
     forms.FloatField: generate_float_field_value,
     forms.GenericIPAddressField: generate_generic_ip_address_field_value,
     forms.IntegerField: generate_integer_field_value,
+    forms.JSONField: generate_json_field_value,
     forms.SlugField: generate_slug_field_value,
     forms.URLField: generate_url_field_value,
     forms.UUIDField: generate_uuid_field_value,
