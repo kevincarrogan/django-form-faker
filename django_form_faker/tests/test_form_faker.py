@@ -30,6 +30,7 @@ from .. import form_faker
         (forms.IntegerField, {}, 6311),
         (forms.SlugField, {}, "three-image-son"),
         (forms.URLField, {}, "https://green.info/"),
+        (forms.UUIDField, {}, "e3e70682-c209-4cac-a29f-6fbed82c07cd"),
     ],
 )
 def test_random_generated_values(field_class, required_kwargs, expected):
@@ -89,6 +90,7 @@ def test_random_generated_files(field_class):
         (forms.IntegerField, {}, 42),
         (forms.SlugField, {}, "explicit-slug"),
         (forms.URLField, {}, "https://example.com/"),
+        (forms.UUIDField, {}, "12345678-1234-5678-1234-567812345678"),
     ],
 )
 def test_explicit_values(field_class, required_kwargs, explicit_value):
@@ -117,6 +119,7 @@ def test_explicit_values(field_class, required_kwargs, explicit_value):
         (forms.IntegerField, {}, 42),
         (forms.SlugField, {}, "explicit-slug"),
         (forms.URLField, {}, "https://example.com/"),
+        (forms.UUIDField, {}, "12345678-1234-5678-1234-567812345678"),
     ],
 )
 def test_explicit_values_on_optional_fields(
@@ -149,6 +152,7 @@ def test_explicit_values_on_optional_fields(
         (forms.IntegerField, {}),
         (forms.SlugField, {}),
         (forms.URLField, {}),
+        (forms.UUIDField, {}),
     ],
 )
 def test_not_required(field_class, required_kwargs):
@@ -181,6 +185,7 @@ def test_not_required(field_class, required_kwargs):
         (forms.IntegerField, {}, 6311),
         (forms.SlugField, {}, "three-image-son"),
         (forms.URLField, {}, "https://green.info/"),
+        (forms.UUIDField, {}, "e3e70682-c209-4cac-a29f-6fbed82c07cd"),
     ],
 )
 def test_optional_fields_with_include_optional_override(
