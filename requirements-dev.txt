@@ -1,5 +1,6 @@
 black
 freezegun
+Pillow
 pre-commit
 pytest
 pytest-cov
