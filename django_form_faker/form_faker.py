@@ -58,6 +58,15 @@ def generate_email_field_value(field_instance):
     return fake.email()
 
 
+def generate_float_field_value(field_instance):
+    kwargs = {}
+    if field_instance.max_value is not None:
+        kwargs["max_value"] = field_instance.max_value
+    if field_instance.min_value is not None:
+        kwargs["min_value"] = field_instance.min_value
+    return fake.pyfloat(**kwargs)
+
+
 generators = {
     forms.BooleanField: generate_boolean_field_value,
     forms.CharField: generate_char_field_value,
@@ -67,6 +76,7 @@ generators = {
     forms.DecimalField: generate_decimal_field_value,
     forms.DurationField: generate_duration_field_value,
     forms.EmailField: generate_email_field_value,
+    forms.FloatField: generate_float_field_value,
 }
 
 

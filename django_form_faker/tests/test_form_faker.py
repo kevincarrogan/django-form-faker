@@ -26,6 +26,7 @@ from .. import form_faker
         ),
         (forms.DurationField, {}, datetime.timedelta(18, 34345)),
         (forms.EmailField, {}, "achang@example.org"),
+        (forms.FloatField, {}, -6.36438676418356),
     ],
 )
 def test_random_generated_values(field_class, required_kwargs, expected):
@@ -81,6 +82,7 @@ def test_random_generated_files(field_class):
         (forms.DecimalField, {}, "1.200320"),
         (forms.DurationField, {}, "4 1:15:20"),
         (forms.EmailField, {}, "testing@example.com"),
+        (forms.FloatField, {}, 1.5),
     ],
 )
 def test_explicit_values(field_class, required_kwargs, explicit_value):
@@ -105,6 +107,7 @@ def test_explicit_values(field_class, required_kwargs, explicit_value):
         (forms.DecimalField, {}, "1.200320"),
         (forms.DurationField, {}, "4 1:15:20"),
         (forms.EmailField, {}, "testing@example.com"),
+        (forms.FloatField, {}, 1.5),
     ],
 )
 def test_explicit_values_on_optional_fields(
@@ -133,6 +136,7 @@ def test_explicit_values_on_optional_fields(
         (forms.DecimalField, {}),
         (forms.DurationField, {}),
         (forms.EmailField, {}),
+        (forms.FloatField, {}),
     ],
 )
 def test_not_required(field_class, required_kwargs):
@@ -161,6 +165,7 @@ def test_not_required(field_class, required_kwargs):
         ),
         (forms.DurationField, {}, datetime.timedelta(18, 34345)),
         (forms.EmailField, {}, "achang@example.org"),
+        (forms.FloatField, {}, -6.36438676418356),
     ],
 )
 def test_optional_fields_with_include_optional_override(
