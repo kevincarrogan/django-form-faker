@@ -76,6 +76,10 @@ def generate_integer_field_value(field_instance):
     return fake.pyint(**kwargs)
 
 
+def generate_slug_field_value(field_instance):
+    return fake.slug()
+
+
 generators = {
     forms.BooleanField: generate_boolean_field_value,
     forms.CharField: generate_char_field_value,
@@ -87,6 +91,7 @@ generators = {
     forms.EmailField: generate_email_field_value,
     forms.FloatField: generate_float_field_value,
     forms.IntegerField: generate_integer_field_value,
+    forms.SlugField: generate_slug_field_value,
 }
 
 
