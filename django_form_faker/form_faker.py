@@ -2,6 +2,7 @@ from faker import Faker
 
 from django import forms
 from django.core.files.uploadedfile import SimpleUploadedFile
+from django.core.validators import validate_ipv6_address
 
 
 fake = Faker()
@@ -67,6 +68,12 @@ def generate_float_field_value(field_instance):
     return fake.pyfloat(**kwargs)
 
 
+def generate_generic_ip_address_field_value(field_instance):
+    if validate_ipv6_address in field_instance.default_validators:
+        return fake.ipv6()
+    return fake.ipv4()
+
+
 def generate_integer_field_value(field_instance):
     kwargs = {}
     if field_instance.max_value is not None:
@@ -98,6 +105,7 @@ generators = {
     forms.DurationField: generate_duration_field_value,
     forms.EmailField: generate_email_field_value,
     forms.FloatField: generate_float_field_value,
+    forms.GenericIPAddressField: generate_generic_ip_address_field_value,
     forms.IntegerField: generate_integer_field_value,
     forms.SlugField: generate_slug_field_value,
     forms.URLField: generate_url_field_value,
