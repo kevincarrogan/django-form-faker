@@ -59,6 +59,10 @@ def generate_email_field_value(field_instance):
     return fake.email()
 
 
+def generate_file_path_field_value(field_instance):
+    return fake.random_element(field_instance.choices)[0]
+
+
 def generate_float_field_value(field_instance):
     kwargs = {}
     if field_instance.max_value is not None:
@@ -122,6 +126,7 @@ generators = {
     forms.DecimalField: generate_decimal_field_value,
     forms.DurationField: generate_duration_field_value,
     forms.EmailField: generate_email_field_value,
+    forms.FilePathField: generate_file_path_field_value,
     forms.FloatField: generate_float_field_value,
     forms.GenericIPAddressField: generate_generic_ip_address_field_value,
     forms.IntegerField: generate_integer_field_value,
