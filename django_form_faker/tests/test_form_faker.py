@@ -47,6 +47,11 @@ from .. import form_faker
             {"choices": [("a", "A"), ("b", "B"), ("c", "C")]},
             "b",
         ),
+        (
+            forms.TypedMultipleChoiceField,
+            {"choices": [("a", "A"), ("b", "B"), ("c", "C")]},
+            ["b", "a"],
+        ),
         (forms.URLField, {}, "https://green.info/"),
         (forms.UUIDField, {}, "e3e70682-c209-4cac-a29f-6fbed82c07cd"),
     ],
@@ -121,6 +126,11 @@ def test_random_generated_files(field_class):
             {"choices": [("a", "A"), ("b", "B"), ("c", "C")]},
             "a",
         ),
+        (
+            forms.TypedMultipleChoiceField,
+            {"choices": [("a", "A"), ("b", "B"), ("c", "C")]},
+            ["a", "c"],
+        ),
         (forms.URLField, {}, "https://example.com/"),
         (forms.UUIDField, {}, "12345678-1234-5678-1234-567812345678"),
     ],
@@ -163,6 +173,11 @@ def test_explicit_values(field_class, required_kwargs, explicit_value):
             forms.TypedChoiceField,
             {"choices": [("a", "A"), ("b", "B"), ("c", "C")]},
             "a",
+        ),
+        (
+            forms.TypedMultipleChoiceField,
+            {"choices": [("a", "A"), ("b", "B"), ("c", "C")]},
+            ["a", "c"],
         ),
         (forms.URLField, {}, "https://example.com/"),
         (forms.UUIDField, {}, "12345678-1234-5678-1234-567812345678"),
@@ -207,6 +222,10 @@ def test_explicit_values_on_optional_fields(
         (forms.TimeField, {}),
         (
             forms.TypedChoiceField,
+            {"choices": [("a", "A"), ("b", "B"), ("c", "C")]},
+        ),
+        (
+            forms.TypedMultipleChoiceField,
             {"choices": [("a", "A"), ("b", "B"), ("c", "C")]},
         ),
         (forms.URLField, {}),
@@ -259,6 +278,11 @@ def test_not_required(field_class, required_kwargs):
             forms.TypedChoiceField,
             {"choices": [("a", "A"), ("b", "B"), ("c", "C")]},
             "b",
+        ),
+        (
+            forms.TypedMultipleChoiceField,
+            {"choices": [("a", "A"), ("b", "B"), ("c", "C")]},
+            ["b", "a"],
         ),
         (forms.URLField, {}, "https://green.info/"),
         (forms.UUIDField, {}, "e3e70682-c209-4cac-a29f-6fbed82c07cd"),

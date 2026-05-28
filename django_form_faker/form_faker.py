@@ -113,6 +113,11 @@ def generate_typed_choice_field_value(field_instance):
     return fake.random_element(field_instance.choices)[0]
 
 
+def generate_typed_multiple_choice_field_value(field_instance):
+    choices = tuple(value for value, label in field_instance.choices)
+    return fake.random_elements(elements=choices, unique=True)
+
+
 def generate_url_field_value(field_instance):
     return fake.url()
 
@@ -140,6 +145,7 @@ generators = {
     forms.SlugField: generate_slug_field_value,
     forms.TimeField: generate_time_field_value,
     forms.TypedChoiceField: generate_typed_choice_field_value,
+    forms.TypedMultipleChoiceField: generate_typed_multiple_choice_field_value,
     forms.URLField: generate_url_field_value,
     forms.UUIDField: generate_uuid_field_value,
 }
